@@ -8,14 +8,14 @@
 ## Andrew
 * You want to understand what everything is doing
 
-# Lawrie
+## Lawrie
 * Learn more about Git and how to use it in a team environment
 
-#Josh
+## Josh
 * Mongo DB consolidation
 * Git knowledge consolidation CSS get better with that
 
-# Approach to work
+## Approach to work
 * pull our tasks from Backlog
 * work together - mob programming comment out our code, just to remember or better understand what is going * do some individual work as well to experience team work in GitHub
 * plan/ prioritise together each morning the backlog
