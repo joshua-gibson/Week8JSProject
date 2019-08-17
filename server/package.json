@@ -6,7 +6,7 @@
   "scripts": {
     "seeds": "mongo < db/seeds.js",
     "start": "node server.js",
-    "server:dev":"nodemon server.js",
+    "server:dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
