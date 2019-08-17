@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <p v-for="(launch, index) in launches">Name: {{launch.name}}</p>
+    <h1>Launches!</h1>
 
     <timeline :launches="this.launches"/>
 
@@ -33,4 +33,9 @@ export default {
 </script>
 
 <style>
+
+h1 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 40px;
+}
 </style>
