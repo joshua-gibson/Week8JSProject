@@ -1,36 +1,36 @@
 <template>
-  <v-app>
-    <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        text
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-app-bar>
+  <div id="app">
+    <p v-for="(launch, index) in launches">Name: {{launch.name}}</p>
 
-    <v-content>
-      <HelloWorld/>
-    </v-content>
-  </v-app>
+    <timeline :launches="this.launches"/>
+
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
+import APIservice from '@/services/APIService.js'
+import Timeline from '@/components/timeline.vue'
 export default {
-  name: 'App',
+  name: 'app',
   components: {
-    HelloWorld,
+    'timeline': Timeline
   },
-  data: () => ({
-    //
-  }),
-};
+  data() {
+    return {
+      launches: []
+    }
+  },
+  mounted() {
+    this.fetchData()
+  },
+  methods: {
+    fetchData(){
+      APIservice.getLaunches()
+      .then(launches => this.launches = launches.launches);
+    }
+  }
+}
 </script>
+
+<style>
+</style>
