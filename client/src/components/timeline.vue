@@ -71,6 +71,7 @@ methods: {
 /* width: 1000px; */
 height: 1000px;
 min-width: 500px;
+max-width: 1500px;
 border: solid grey 1px;
 overflow: auto;
 -webkit-box-shadow: 3px 3px 20px 0px rgba(130,128,130,0.48);
