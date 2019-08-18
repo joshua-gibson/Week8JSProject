@@ -12,7 +12,7 @@
   >
 
   <template v-slot:opposite>
-    <span class="opYear">YEAR</span>
+    <span class="opYear">{{formatDt(launch.isonet)}}</span>
   </template>
 
     <v-card>
@@ -30,6 +30,13 @@
 
           </v-col>
         </v-row>
+          <v-icon
+            size="42"
+            class="opYear"
+          >
+            mdi-magnify
+          </v-icon>
+          <span>More Info Button</span>
       </v-container>
 
     </v-card>
@@ -47,7 +54,10 @@
 <script>
 export default {
   name: 'Timeline',
-  props: ['launches']
+  props: ['launches'],
+methods: {
+  formatDt(isonetString){return isonetString.substring(0,8)}
+}
 }
 </script>
 
