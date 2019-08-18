@@ -12,7 +12,7 @@
   >
 
   <template v-slot:opposite>
-    <span class="opYear">{{formatDt(launch.isonet)}}</span>
+    <span class="opYear">{{formatDtLong(launch.isonet)}}</span>
   </template>
 
     <v-hover v-slot:default="{ hover }">
@@ -57,8 +57,18 @@
 export default {
   name: 'Timeline',
   props: ['launches'],
+  data() {
+    return {
+      monthArr: ['January', 'February','March','April','May','June',
+      'July','August','September','October','November','December']
+    }
+  },
 methods: {
-  formatDt(isonetString){return isonetString.substring(0,8)}
+  formatDtLong(isonetString){
+    let lDate = new Date(isonetString.substring(0,4), parseInt(isonetString.substring(4,6),10) - 1, isonetString.substring(6,8));
+    
+    return `${lDate.getFullYear()} - ${this.monthArr[lDate.getMonth()]} ${lDate.getDate()}`;
+  }
 }
 }
 </script>
