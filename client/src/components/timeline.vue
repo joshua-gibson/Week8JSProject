@@ -15,7 +15,8 @@
     <span class="opYear">{{formatDt(launch.isonet)}}</span>
   </template>
 
-    <v-card>
+    <v-hover v-slot:default="{ hover }">
+    <v-card :elevation="hover ? 12 : 2">
 
       <v-card-title class="tl cardTitle">
         <h2 >{{launch.name}}</h2>
@@ -40,6 +41,7 @@
       </v-container>
 
     </v-card>
+  </v-hover>
 
   </v-timeline-item>
 
