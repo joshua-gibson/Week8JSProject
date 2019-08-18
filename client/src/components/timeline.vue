@@ -28,7 +28,7 @@
         <v-row>
           <v-col cols="12" md="10">
             <p>Rocket Type: {{launch.rocket.familyname}}</p>
-            <p>Description: {{launch.missions[0].description}}</p>
+            <p v-if="launch.missions[0]">Description: {{launch.missions[0].description}}</p>
             <p>Location: {{launch.location.pads[0].name}}</p>
 
           </v-col>
@@ -59,6 +59,20 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.TimelineContainer {
+  display: flex;
+  flex-grow: 2;
+  margin: 5px;
+  padding: 5px;
+/* width: 1000px; */
+height: 1000px;
+border: solid grey 1px;
+overflow: auto;
+-webkit-box-shadow: 3px 3px 20px 0px rgba(130,128,130,0.48);
+-moz-box-shadow: 3px 3px 20px 0px rgba(130,128,130,0.48);
+box-shadow: 3px 3px 20px 0px rgba(130,128,130,0.48);
+}
+
 
 .tl {
   font-family: 'Josefin Sans', sans-serif;
