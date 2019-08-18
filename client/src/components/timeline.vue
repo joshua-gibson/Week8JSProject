@@ -1,41 +1,33 @@
 <template lang="html">
 <div class="TimelineContainer">
-  <v-timeline :reverse=true>
+  <v-app id="inspire">
+  <v-timeline class="tl"
+    :reverse=true
+
+    >
 
   <v-timeline-item
+    color="orange"
     v-for="(launch, index) in launches"
-    fill-dot
-    small
-    dense
-    :left = false
-    :right = false
   >
+
+  <template v-slot:opposite>
+    <span class="opYear">YEAR</span>
+  </template>
 
     <v-card>
 
-      <v-card-title class="tl">
-        <v-icon
-          dark
-          size="42"
-          class="mr-3"
-        >
-          mdi-magnify
-        </v-icon>
-        <h2>{{launch.name}}</h2>
+      <v-card-title class="tl cardTitle">
+        <h2 >{{launch.name}}</h2>
       </v-card-title>
 
-      <v-container class="tl">
+      <v-container class="cardBody">
         <v-row>
           <v-col cols="12" md="10">
-            <p>Rocket Type: {{launch.rocket.familyname}}</p>
-            <p v-if="launch.missions[0]">Description: {{launch.missions[0].description}}</p>
-            <p>Location: {{launch.location.pads[0].name}}</p>
+            <p> <span class="itemLabel">Rocket Type:   </span> {{launch.rocket.familyname}}</p>
+            <p> <span class="itemLabel" v-if="launch.missions[0]"> Description: </span>  <span v-if="launch.missions[0]" >{{launch.missions[0].description}}</span> </p>
+            <p> <span class="itemLabel">Location: </span>  <span>{{launch.location.pads[0].name}}</span>  </p>
 
-          </v-col>
-          <v-col
-            class="hidden-sm-and-down text-right"
-            md="2"
-          >
           </v-col>
         </v-row>
       </v-container>
@@ -48,6 +40,7 @@
 
 
 </v-timeline>
+</v-app>
 </div>
 </template>
 
@@ -59,13 +52,15 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
 .TimelineContainer {
   display: flex;
   flex-grow: 2;
-  margin: 5px;
-  padding: 5px;
+  margin: 50px;
+  padding: 50px;
 /* width: 1000px; */
 height: 1000px;
+min-width: 500px;
 border: solid grey 1px;
 overflow: auto;
 -webkit-box-shadow: 3px 3px 20px 0px rgba(130,128,130,0.48);
@@ -76,10 +71,39 @@ box-shadow: 3px 3px 20px 0px rgba(130,128,130,0.48);
 
 .tl {
   font-family: 'Josefin Sans', sans-serif;
+  background-color: white;
+
 }
 
-h2 {
-  font-size: 20px;
+.cardTitle {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  margin: 0px;
+  padding: 5px;
+  background-color: orange;
+  color: white;
 }
+
+.cardBody {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  margin: 2px;
+  padding: 1px;
+}
+
+.opYear {
+  font-family: 'Josefin Sans', sans-serif;
+  color: orange;
+  font-size: 30px;
+  font-weight: 1000;
+  margin: 1px;
+  padding: 1px;
+}
+
+.itemLabel {
+  font-weight: bold;
+}
+
+
 
 </style>
