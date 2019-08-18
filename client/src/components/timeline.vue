@@ -1,5 +1,7 @@
 <template lang="html">
+<div class="buffer">
 <div class="TimelineContainer">
+
   <v-app id="inspire">
   <v-timeline class="tl"
     :reverse=true
@@ -51,6 +53,9 @@
 </v-timeline>
 </v-app>
 </div>
+</div>
+
+</div>
 </template>
 
 <script>
@@ -59,14 +64,14 @@ export default {
   props: ['launches'],
   data() {
     return {
-      monthArr: ['January', 'February','March','April','May','June',
+      monthArr: ['January','February','March','April','May','June',
       'July','August','September','October','November','December']
     }
   },
 methods: {
   formatDtLong(isonetString){
     let lDate = new Date(isonetString.substring(0,4), parseInt(isonetString.substring(4,6),10) - 1, isonetString.substring(6,8));
-    
+
     return `${lDate.getFullYear()} - ${this.monthArr[lDate.getMonth()]} ${lDate.getDate()}`;
   }
 }
@@ -79,6 +84,7 @@ methods: {
   display: flex;
   flex-grow: 2;
   margin: 50px;
+  border: 5px;
   padding: 50px;
 /* width: 1000px; */
 height: 1000px;
@@ -91,11 +97,16 @@ overflow: auto;
 box-shadow: 3px 3px 20px 0px rgba(130,128,130,0.48);
 }
 
+.buffer {
+  display: flex;
+  margin: 1px;
+  padding: 1px;
+}
+
 
 .tl {
   font-family: 'Josefin Sans', sans-serif;
   background-color: white;
-
 }
 
 .cardTitle {
