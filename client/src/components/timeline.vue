@@ -5,7 +5,7 @@
         <v-timeline-item color="orange" v-for="(launch, index) in launches" :key="index">
 
           <template v-slot:opposite>
-            <span class="opYear">{{ formatDtLong(launch.isonet) }}</span>
+            <span class="opYear">{{ launch.isonet | formattedDate }}</span>
           </template>
 
           <v-hover v-slot:default="{ hover }">
@@ -44,19 +44,20 @@
 <script>
 export default {
   name: 'Timeline',
+  filters: {
+    formattedDate(isonetString) {
+      const monthArr = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const lDate = new Date(isonetString.substring(0,4), parseInt(isonetString.substring(4,6),10) - 1, isonetString.substring(6,8));
+      return `${lDate.getFullYear()} - ${monthArr[lDate.getMonth()]} ${lDate.getDate()}`;
+    }
+  },
   props: ['launches'],
   data() {
     return {
       monthArr: ['January','February','March','April','May','June',
         'July','August','September','October','November','December']
     }
-  },
-  methods: {
-    formatDtLong(isonetString){
-      const lDate = new Date(isonetString.substring(0,4), parseInt(isonetString.substring(4,6),10) - 1, isonetString.substring(6,8));
-      return `${lDate.getFullYear()} - ${this.monthArr[lDate.getMonth()]} ${lDate.getDate()}`;
-    }
-  },
+  }
 }
 </script>
 
