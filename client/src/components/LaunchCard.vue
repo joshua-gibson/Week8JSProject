@@ -3,29 +3,30 @@
     <template v-slot:opposite>
       <span class="opYear">{{ launch.isonet | formattedDate }}</span>
     </template>
-    <v-hover v-slot:default="{ hover }">
-      <v-card :elevation="hover ? 12 : 2">
-        <v-card-title class="tl cardTitle">
-          <h2> {{ launch.name }} </h2>
-        </v-card-title>
-        <v-row>
-          <v-col cols="12" md="10">
-            <p>
+    <v-card>
+      <v-card-title class="tl cardTitle">
+        {{ launch.name }}
+      </v-card-title>
+      <v-row>
+        <v-col cols="12" md="10">
+          <v-card-text>
             <span class="itemLabel"> Rocket Type: </span>
             {{ launch.rocket.familyname }}
-            </p>
-            <p>
+          </v-card-text>
+          <v-card-text>
+            <span class="itemLabel"> Agency: </span>
+            {{ launch.lsp.name }}
+          </v-card-text>
+          <v-card-text>
             <span class="itemLabel">Location: </span>
             <span>{{ launch.location.pads[0].name }}</span> 
-            </p>
-          </v-col>
-        </v-row>
-        <div v-if="moreInfoAvailable">
-          <v-icon size="42" class="opYear"> mdi-magnify </v-icon>
-          <v-btn @click="showMoreInfo">More Info</v-btn>
-        </div>
-      </v-card>
-    </v-hover>
+          </v-card-text>
+        </v-col>
+      </v-row>
+      <div v-if="moreInfoAvailable">
+        <v-btn :block="true" @click="showMoreInfo">More Info</v-btn>
+      </div>
+    </v-card>
   </v-timeline-item>
 </template>
 
@@ -38,7 +39,7 @@ export default {
     formattedDate(isonetString) {
       const monthArr = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       const lDate = new Date(isonetString.substring(0,4), parseInt(isonetString.substring(4,6),10) - 1, isonetString.substring(6,8));
-      return `${lDate.getFullYear()} - ${monthArr[lDate.getMonth()]} ${lDate.getDate()}`;
+      return `${monthArr[lDate.getMonth()]} ${lDate.getDate()}`;
     }
   },
   data() { return { popup: false } }, 
