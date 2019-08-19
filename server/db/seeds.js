@@ -1,0 +1,2 @@
+use launches;
+db.dropDatabase();
