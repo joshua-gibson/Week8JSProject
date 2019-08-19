@@ -3,7 +3,6 @@
     <template v-slot:opposite>
       <span class="opYear">{{ launch.isonet | formattedDate }}</span>
     </template>
-
     <v-hover v-slot:default="{ hover }">
       <v-card :elevation="hover ? 12 : 2">
         <v-card-title class="tl cardTitle">
