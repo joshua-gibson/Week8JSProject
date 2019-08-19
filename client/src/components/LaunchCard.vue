@@ -15,13 +15,7 @@
             {{ launch.rocket.familyname }}
             </p>
             <p>
-            <span class="itemLabel" v-if="launch.missions[0]"> Description: </span> 
-            <span v-if="launch.missions[0]">
-              {{ launch.missions[0].description }}
-            </span> 
-            </p>
-            <p>
-            <span class="itemLabel">Location:</span>
+            <span class="itemLabel">Location: </span>
             <span>{{ launch.location.pads[0].name }}</span> 
             </p>
           </v-col>
@@ -49,6 +43,7 @@ export default {
   props: ['launch'],
   methods: {
     showMoreInfo() {
+      console.log('clicked');
       eventBus.$emit('display-info', this.launch);
     }
   }
