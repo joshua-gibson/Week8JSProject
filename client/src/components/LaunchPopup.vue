@@ -18,10 +18,6 @@
             <strong> Location: </strong>
             {{ launch.location.name }}
           </v-list-item-subtitle>
-          <v-list-item-subtitle>
-            <strong> Date: </strong>
-            {{ launch. }}
-          </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
