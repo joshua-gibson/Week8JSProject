@@ -1,5 +1,10 @@
 <template>
   <div id="splash" :style="{ height: splashHeight }">
+    <div class="videoBgWrapper">
+        <video loop muted autoplay poster="../assets/spaceshuttle.jpg" class="videoBg">
+            <source src="../assets/shuttlecinemagraph.mp4" type="video/mp4">
+        </video>
+    </div>
     <h1>Launches!</h1>
     <h3> A time-line of all future-space launches</h3>
 
@@ -20,10 +25,10 @@ export default {
 </script>
 
 <style>
-#splash {
+/* #splash {
 background-image: url("../assets/spaceshuttle.jpg");
 background-size: cover;
-}
+} */
 
 h1, h3 {
   font-family: 'Josefin Sans', sans-serif;
@@ -42,6 +47,23 @@ h3 {
   /* padding-top: px; */
 }
 
+.videoBgWrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.videoBg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 /* #splash {
   background: url(../assets/spaceshuttle.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
