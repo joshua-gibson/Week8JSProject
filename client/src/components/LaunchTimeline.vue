@@ -16,16 +16,37 @@ export default {
   components: { 'launch-card': LaunchCard },
   data() {
     return {
-      launches: []
+      launches: [],
+      bottom: false,
+      currDate: null
     }
   },
   mounted() {
+    this.currDate = new Date();
     this.fetchData()
+    window.addEventListener('scroll', () => {
+      this.bottom = this.bottomVisible();
+    });
   },
   methods: {
+    bottomVisible() {
+      const scrollY = window.scrollY;
+      const visible = document.documentElement.clientHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const bottomOfPage = visible + scrollY >= pageHeight;
+      return bottomOfPage || pageHeight < visible;
+    },
     fetchData(){
-      APIservice.getLaunches()
+      APIservice.getLaunches(this.currDate)
       .then(launches => this.launches = launches.launches);
+    }
+  },
+  watch: {
+    bottom(bottom) {
+      if (bottom) {
+        this.fetchData();
+        this.currDate.setDate(this.currDate.getDate() + 20);
+      }
     }
   }
 }
