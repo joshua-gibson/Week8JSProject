@@ -1,15 +1,12 @@
 <template>
-  <div id="splash" :style="{ height: splashHeight }">
-    <div class="videoBgWrapper">
+  <div :style="{ height: splashHeight }">
+
         <video loop muted autoplay poster="../assets/spaceshuttle.jpg" class="videoBg">
             <source src="../assets/shuttlecinemagraph.mp4" type="video/mp4">
         </video>
-    </div>
-    <h1>Launches!</h1>
-    <h3> A time-line of all future-space launches</h3>
-
-
 </div>
+<!-- <h1>Launches!</h1>
+<h3> A time-line of all future-space launches</h3> -->
 </template>
 
 <script>
@@ -25,10 +22,6 @@ export default {
 </script>
 
 <style>
-/* #splash {
-background-image: url("../assets/spaceshuttle.jpg");
-background-size: cover;
-} */
 
 h1, h3 {
   font-family: 'Josefin Sans', sans-serif;
@@ -48,6 +41,7 @@ h3 {
 }
 
 .videoBgWrapper {
+  /* background-size: cover; */
     position: fixed;
     top: 0;
     right: 0;
@@ -58,29 +52,15 @@ h3 {
 }
 
 .videoBg{
+  /* background-size: cover; */
     position: absolute;
+    object-fit: fill;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
-/* #splash {
-  background: url(../assets/spaceshuttle.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover; */
-
-/* #video-background {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: -100;
-} */
 
 
 </style>
