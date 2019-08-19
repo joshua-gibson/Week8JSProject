@@ -11,7 +11,7 @@
 export default {
   name: 'LaunchSplash',
   data() {
-    return { splashHeight: '' }
+    return { splashHeight: '1000px' }
   },
   mounted() {
     this.splashHeight = `${window.innerHeight}px`;
