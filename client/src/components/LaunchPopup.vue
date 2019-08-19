@@ -2,7 +2,6 @@
   <v-dialog v-model="dialog" max-width="600">
     <v-card v-if="launch" class="mx-auto">
       <v-list-item>
-        <v-list-item-avatar color="grey" />
         <v-list-item-content>
           <v-list-item-title class="headline">
             {{ launch.missions[0].name }}
@@ -11,15 +10,22 @@
             <strong> Rocket: </strong>
             {{ launch.rocket.familyname }}
           </v-list-item-subtitle>
+          <v-list-item-subtitle v-if="launch.lsp.name">
+            <strong> Agency: </strong>
+            {{ launch.lsp.name }}
+          </v-list-item-subtitle>
+          <v-list-item-subtitle v-if="launch.location">
+            <strong> Location: </strong>
+            {{ launch.location.name }}
+          </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
     <v-img v-if="imageURL" :contain="true" :src="imageURL" height="300"></v-img>
 
-      <v-card-text>
+      <v-card-text class="desc">
         {{ launch.missions[0].description }}
       </v-card-text>
-
 
     </v-card>
   </v-dialog>
@@ -54,4 +60,7 @@ export default {
 </script>
 
 <style>
+  .desc {
+    margin-top: 1em;
+  }
 </style>
