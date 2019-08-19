@@ -20,8 +20,10 @@
             </p>
           </v-col>
         </v-row>
-        <v-icon size="42" class="opYear"> mdi-magnify </v-icon>
-        <v-btn @click="showMoreInfo">More Info</v-btn>
+        <div v-if="moreInfoAvailable">
+          <v-icon size="42" class="opYear"> mdi-magnify </v-icon>
+          <v-btn @click="showMoreInfo">More Info</v-btn>
+        </div>
       </v-card>
     </v-hover>
   </v-timeline-item>
@@ -41,6 +43,12 @@ export default {
   },
   data() { return { popup: false } }, 
   props: ['launch'],
+  computed: {
+    moreInfoAvailable() {
+      if (this.launch.missions.length > 0) return true;
+      return false;
+    }
+  },
   methods: {
     showMoreInfo() {
       eventBus.$emit('display-info', this.launch);

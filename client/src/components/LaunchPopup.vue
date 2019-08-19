@@ -5,7 +5,7 @@
         <v-list-item-avatar color="grey" />
         <v-list-item-content>
           <v-list-item-title class="headline">
-            {{ launch.name }}
+            {{ launch.missions[0].name }}
           </v-list-item-title>
           <v-list-item-subtitle>
             <strong> Rocket: </strong>
@@ -14,11 +14,13 @@
         </v-list-item-content>
       </v-list-item>
 
-    <v-img :contain="true" :src="imageURL" height="300"></v-img>
+    <v-img v-if="imageURL" :contain="true" :src="imageURL" height="300"></v-img>
 
       <v-card-text>
         {{ launch.missions[0].description }}
       </v-card-text>
+
+
     </v-card>
   </v-dialog>
 </template>
