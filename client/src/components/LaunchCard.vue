@@ -21,7 +21,7 @@
           </v-col>
         </v-row>
         <v-icon size="42" class="opYear"> mdi-magnify </v-icon>
-        <v-btn @click="showMoreInfo">More Info Button</v-btn>
+        <v-btn @click="showMoreInfo">More Info</v-btn>
       </v-card>
     </v-hover>
   </v-timeline-item>
@@ -43,7 +43,6 @@ export default {
   props: ['launch'],
   methods: {
     showMoreInfo() {
-      console.log('clicked');
       eventBus.$emit('display-info', this.launch);
     }
   }
