@@ -27,13 +27,15 @@
           </v-col>
         </v-row>
         <v-icon size="42" class="opYear"> mdi-magnify </v-icon>
-        <span>More Info Button</span>
+        <v-btn @click="showMoreInfo">More Info Button</v-btn>
       </v-card>
     </v-hover>
   </v-timeline-item>
 </template>
 
 <script>
+import { eventBus } from '@/main.js';
+
 export default {
   name: 'LaunchCard',
   filters: {
@@ -43,7 +45,13 @@ export default {
       return `${lDate.getFullYear()} - ${monthArr[lDate.getMonth()]} ${lDate.getDate()}`;
     }
   },
-  props: ['launch']
+  data() { return { popup: false } }, 
+  props: ['launch'],
+  methods: {
+    showMoreInfo() {
+      eventBus.$emit('display-info', this);
+    }
+  }
 }
 </script>
 
