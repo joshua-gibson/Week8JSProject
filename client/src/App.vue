@@ -35,13 +35,6 @@ export default {
 
 <style>
 
-h1 {
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 40px;
-}
 
-#app {
-  padding: 20px;
-}
 
 </style>

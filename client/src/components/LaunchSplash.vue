@@ -1,11 +1,10 @@
 <template>
   <div id="splash" :style="{ height: splashHeight }">
     <h1>Launches!</h1>
-    <!-- <video autoplay loop id="video-background" muted plays-inline>
-  <source src="https://www.youtube.com/watch?v=wnhvanMdx4s" type="video/mp4">
-</video> -->
-<img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"/>
-  </div>
+    <h3> A time-line of all future-space launches</h3>
+
+
+</div>
 </template>
 
 <script>
@@ -21,8 +20,34 @@ export default {
 </script>
 
 <style>
+#splash {
+background-image: url("../assets/spaceshuttle.jpg");
+background-size: cover;
+}
+
+h1, h3 {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  padding-top: 150px;
+}
+
+h3 {
+  color: white;
+  padding-top: 10px;
+  text-align: center;
+  /* padding-top: px; */
+}
+
 /* #splash {
-} */
+  background: url(../assets/spaceshuttle.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; */
 
 /* #video-background {
   position: fixed;
@@ -34,4 +59,6 @@ export default {
   height: auto;
   z-index: -100;
 } */
+
+
 </style>
