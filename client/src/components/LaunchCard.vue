@@ -49,7 +49,7 @@ export default {
   props: ['launch'],
   methods: {
     showMoreInfo() {
-      eventBus.$emit('display-info', this);
+      eventBus.$emit('display-info', this.launch);
     }
   }
 }
