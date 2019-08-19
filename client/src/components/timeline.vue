@@ -1,61 +1,44 @@
 <template lang="html">
-<div class="buffer">
-<div class="TimelineContainer">
+  <div class="buffer">
+    <v-app id="inspire">
+      <v-timeline class="tl" :reverse="true">
+        <v-timeline-item color="orange" v-for="(launch, index) in launches" :key="index">
 
-  <v-app id="inspire">
-  <v-timeline class="tl"
-    :reverse=true
+          <template v-slot:opposite>
+            <span class="opYear">{{ formatDtLong(launch.isonet) }}</span>
+          </template>
 
-    >
-
-  <v-timeline-item
-    color="orange"
-    v-for="(launch, index) in launches"
-  >
-
-  <template v-slot:opposite>
-    <span class="opYear">{{formatDtLong(launch.isonet)}}</span>
-  </template>
-
-    <v-hover v-slot:default="{ hover }">
-    <v-card :elevation="hover ? 12 : 2">
-
-      <v-card-title class="tl cardTitle">
-        <h2 >{{launch.name}}</h2>
-      </v-card-title>
-
-      <v-container class="cardBody">
-        <v-row>
-          <v-col cols="12" md="10">
-            <p> <span class="itemLabel">Rocket Type:   </span> {{launch.rocket.familyname}}</p>
-            <p> <span class="itemLabel" v-if="launch.missions[0]"> Description: </span>  <span v-if="launch.missions[0]" >{{launch.missions[0].description}}</span> </p>
-            <p> <span class="itemLabel">Location: </span>  <span>{{launch.location.pads[0].name}}</span>  </p>
-
-          </v-col>
-        </v-row>
-          <v-icon
-            size="42"
-            class="opYear"
-          >
-            mdi-magnify
-          </v-icon>
-          <span>More Info Button</span>
-      </v-container>
-
-    </v-card>
-  </v-hover>
-
-  </v-timeline-item>
-
-
-
-
-</v-timeline>
-</v-app>
-</div>
-</div>
-
-</div>
+          <v-hover v-slot:default="{ hover }">
+            <v-card :elevation="hover ? 12 : 2">
+              <v-card-title class="tl cardTitle">
+                <h2> {{ launch.name }} </h2>
+              </v-card-title>
+              <v-row>
+                <v-col cols="12" md="10">
+                  <p>
+                    <span class="itemLabel"> Rocket Type: </span>
+                    {{ launch.rocket.familyname }}
+                  </p>
+                  <p>
+                    <span class="itemLabel" v-if="launch.missions[0]"> Description: </span> 
+                    <span v-if="launch.missions[0]">
+                      {{ launch.missions[0].description }}
+                    </span> 
+                  </p>
+                  <p>
+                    <span class="itemLabel">Location:</span>
+                    <span>{{ launch.location.pads[0].name }}</span> 
+                  </p>
+                </v-col>
+              </v-row>
+              <v-icon size="42" class="opYear"> mdi-magnify </v-icon>
+              <span>More Info Button</span>
+            </v-card>
+          </v-hover>
+        </v-timeline-item>
+      </v-timeline>
+    </v-app>
+  </div>
 </template>
 
 <script>
@@ -65,28 +48,27 @@ export default {
   data() {
     return {
       monthArr: ['January','February','March','April','May','June',
-      'July','August','September','October','November','December']
+        'July','August','September','October','November','December']
     }
   },
-methods: {
-  formatDtLong(isonetString){
-    let lDate = new Date(isonetString.substring(0,4), parseInt(isonetString.substring(4,6),10) - 1, isonetString.substring(6,8));
-
-    return `${lDate.getFullYear()} - ${this.monthArr[lDate.getMonth()]} ${lDate.getDate()}`;
-  }
-}
+  methods: {
+    formatDtLong(isonetString){
+      const lDate = new Date(isonetString.substring(0,4), parseInt(isonetString.substring(4,6),10) - 1, isonetString.substring(6,8));
+      return `${lDate.getFullYear()} - ${this.monthArr[lDate.getMonth()]} ${lDate.getDate()}`;
+    }
+  },
 }
 </script>
 
 <style lang="css" scoped>
-
+/*
 .TimelineContainer {
-  display: flex;
-  flex-grow: 2;
-  margin: 50px;
-  border: 5px;
-  padding: 50px;
-/* width: 1000px; */
+display: flex;
+flex-grow: 2;
+margin: 50px;
+border: 5px;
+padding: 50px;
+width: 1000px;
 height: 1000px;
 min-width: 500px;
 max-width: 1500px;
@@ -96,11 +78,10 @@ overflow: auto;
 -moz-box-shadow: 3px 3px 20px 0px rgba(130,128,130,0.48);
 box-shadow: 3px 3px 20px 0px rgba(130,128,130,0.48);
 }
+ */
 
 .buffer {
   display: flex;
-  margin: 1px;
-  padding: 1px;
 }
 
 

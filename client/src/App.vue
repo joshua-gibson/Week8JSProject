@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <h1>Launches!</h1>
-
-    <timeline :launches="this.launches"/>
-
+    <timeline :launches="launches"/>
   </div>
 </template>
 
@@ -38,4 +36,9 @@ h1 {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 40px;
 }
+
+#app {
+  padding: 20px;
+}
+
 </style>
