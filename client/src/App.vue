@@ -1,18 +1,16 @@
 <template>
   <div id="app">
     <h1>Launches!</h1>
-    <timeline :launches="launches"/>
+    <launch-timeline :launches="launches" />
   </div>
 </template>
 
 <script>
 import APIservice from '@/services/APIService.js'
-import Timeline from '@/components/timeline.vue'
+import LaunchTimeline from '@/components/LaunchTimeline.vue'
 export default {
   name: 'app',
-  components: {
-    'timeline': Timeline
-  },
+  components: { 'launch-timeline': LaunchTimeline },
   data() {
     return {
       launches: []
