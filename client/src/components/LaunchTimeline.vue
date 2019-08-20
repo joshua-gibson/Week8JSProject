@@ -1,23 +1,32 @@
 <template lang="html">
-  <div class="buffer">
-    <v-app id="inspire">
-      <v-timeline class="tl" :reverse="true">
-        <launch-card v-for="(launch, index) in launches" :launch="launch" :key="index" />
-      </v-timeline>
-    </v-app>
+  <div>
+    <div class="tl-container">
+      <v-app id="inspire">
+        <v-timeline class="tl" :reverse="true">
+          <launch-card v-for="(launch, index) in launches" :launch="launch" :key="index" />
+        </v-timeline>
+      </v-app>
+    </div>
+    <bottom-spinner :loading="loading"/>
   </div>
 </template>
 
 <script>
 import APIservice from '@/services/APIService.js';
 import LaunchCard from '@/components/LaunchCard.vue';
+import BottomSpinner from '@/components/BottomSpinner.vue';
+
 export default {
   name: 'LaunchTimeline',
-  components: { 'launch-card': LaunchCard },
+  components: {
+    'launch-card': LaunchCard,
+    'bottom-spinner': BottomSpinner
+  },
   data() {
     return {
       launches: [],
       bottom: false,
+      loading: false,
       currDate: null
     }
   },
@@ -37,13 +46,18 @@ export default {
       return bottomOfPage || pageHeight < visible;
     },
     fetchData(){
+      this.loading = true;
       APIservice.getLaunches(this.currDate)
-      .then(launches => this.launches = launches.launches);
+        .then(launches => {
+          this.loading = false;
+          this.launches = this.launches.concat(launches.launches);
+        });
     }
   },
   watch: {
     bottom(bottom) {
       if (bottom) {
+        console.log('At bottom');
         this.fetchData();
         this.currDate.setDate(this.currDate.getDate() + 20);
       }
@@ -53,7 +67,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.buffer {
+.tl-container {
   display: flex;
 }
 

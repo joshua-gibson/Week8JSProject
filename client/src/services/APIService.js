@@ -1,4 +1,5 @@
 const daysToAdd = 30;
+const limit = 100;
 
 const getDateString = (date) => {
   const year = date.getFullYear();
@@ -13,7 +14,7 @@ export default {
   getLaunches(date) {
   const endDate = new Date(date);
   endDate.setDate(endDate.getDate() + daysToAdd);
-  const baseURL = `https://launchlibrary.net/1.4/launch/${getDateString(date)}/${getDateString(endDate)}`
+  const baseURL = `https://launchlibrary.net/1.4/launch/${getDateString(date)}/${getDateString(endDate)}?limit=${limit}`
     return fetch(`${baseURL}`).then(res=>res.json());
   }
 }
