@@ -8,18 +8,23 @@ const createRouter = function (collection) {
 
   router.get('/:startDate/:endDate', (req, res) => {
     const baseURL = `https://launchlibrary.net/1.4/launch`
-    const limit = 100;
+    const limit = 1000;
     const startDate = req.params.startDate;
     const endDate = req.params.endDate;
     const apiURL = `${baseURL}/${startDate}/${endDate}?limit=${limit}`
+
+    /*
     fetch(apiURL)
       .then(apiRes => apiRes.json())
       .then(json => res.json(json));
-    
-    // TODO: Caching
-    /*
-     collection
-    .find()
+    */
+
+    .find({
+      isonet: {
+        $gte: ISODate(startDate),
+        $lte: ISODate(endDate)
+      }
+    })
     .toArray()
     .then((docs) => res.json(docs))
     .catch((err) => {
