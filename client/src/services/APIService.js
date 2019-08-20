@@ -15,5 +15,13 @@ export default {
   endDate.setDate(endDate.getDate() + daysToAdd);
   const baseURL = `${apiURL}/${getDateString(date)}/${getDateString(endDate)}`
     return fetch(`${baseURL}`).then(res=>res.json());
+  },
+
+  replaceLaunches(sdate, edate) {
+  const startDate = new Date(sdate);
+  const endDate = new Date(edate);
+  const baseURL = `${apiURL}/${getDateString(startDate)}/${getDateString(endDate)}`
+    return fetch(`${baseURL}`).then(res=>res.json());
   }
+
 }
