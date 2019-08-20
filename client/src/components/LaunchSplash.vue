@@ -4,8 +4,8 @@
         <video loop muted autoplay poster="../assets/spaceshuttle.jpg" class="videoBg">
             <source src="../assets/shuttlecinemagraph.mp4" type="video/mp4">
         </video>
-      <h1>Launches!</h1>
-      <h3>A timeline of all future space launches</h3>
+      <h1>Nova.</h1>
+      <h3>The Future of Space Agency Launches</h3>
 </div>
 </template>
 
@@ -31,8 +31,9 @@ h1 {
   color: white;
   text-align: center;
   padding-top: 100px;
-  font-size: 3rem;
+  font-size: 4rem;
   position:relative;
+  text-shadow: 2px 2px black
 }
 
 h3 {
@@ -41,6 +42,7 @@ h3 {
   text-align: center;
   font-size: 2rem;
   position: relative;
+  text-shadow: 2px 2px black
   /* padding-top: px; */
 }
 
