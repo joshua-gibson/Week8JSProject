@@ -12,13 +12,13 @@ const createRouter = function (collection) {
     const startDate = req.params.startDate;
     const endDate = req.params.endDate;
     const apiURL = `${baseURL}/${startDate}/${endDate}?limit=${limit}`
-    console.log(`Reqesting API at: ${apiURL}`);
     fetch(apiURL)
       .then(apiRes => apiRes.json())
       .then(json => res.json(json));
-
+    
+    // TODO: Caching
     /*
-    collection
+     collection
     .find()
     .toArray()
     .then((docs) => res.json(docs))
@@ -28,6 +28,7 @@ const createRouter = function (collection) {
       res.json({ status: 500, error: err });
     });
     */
+
   });
 
   return router;
