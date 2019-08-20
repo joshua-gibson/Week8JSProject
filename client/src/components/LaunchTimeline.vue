@@ -1,5 +1,6 @@
 <template lang="html">
   <div>
+    <nav-bar/>
     <div class="tl-container">
       <v-app id="inspire">
         <v-timeline class="tl" :reverse="true">
@@ -12,6 +13,7 @@
 </template>
 
 <script>
+import NavBar from '@/components/NavBar.vue';
 import APIservice from '@/services/APIService.js';
 import LaunchCard from '@/components/LaunchCard.vue';
 import BottomSpinner from '@/components/BottomSpinner.vue';
@@ -20,7 +22,8 @@ export default {
   name: 'LaunchTimeline',
   components: {
     'launch-card': LaunchCard,
-    'bottom-spinner': BottomSpinner
+    'bottom-spinner': BottomSpinner,
+    'nav-bar': NavBar
   },
   data() {
     return {
