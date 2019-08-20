@@ -4,9 +4,9 @@
         <video loop muted autoplay poster="../assets/spaceshuttle.jpg" class="videoBg">
             <source src="../assets/shuttlecinemagraph.mp4" type="video/mp4">
         </video>
+      <h1>Launches!</h1>
+      <h3>A timeline of all future space launches</h3>
 </div>
-<!-- <h1>Launches!</h1>
-<h3> A time-line of all future-space launches</h3> -->
 </template>
 
 <script>
@@ -30,30 +30,32 @@ h1, h3 {
 h1 {
   color: white;
   text-align: center;
-  padding-top: 150px;
+  padding-top: 100px;
+  font-size: 3rem;
+  position:relative;
 }
 
 h3 {
   color: white;
   padding-top: 10px;
   text-align: center;
+  font-size: 2rem;
+  position: relative;
   /* padding-top: px; */
 }
 
-.videoBgWrapper {
-  /* background-size: cover; */
-    position: fixed;
+/* .videoBgWrapper {
+    position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     overflow: hidden;
     z-index: -100;
-}
+} */
 
 .videoBg{
-  /* background-size: cover; */
-    position: absolute;
+    position:absolute;
     object-fit: fill;
     top: 0;
     left: 0;
