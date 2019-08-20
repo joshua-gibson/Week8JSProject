@@ -21,6 +21,8 @@
         </v-list-item-content>
       </v-list-item>
 
+      <launch-map v-if="launch.location.pads" :pad="launch.location.pads[0]"/>
+
     <v-img v-if="imageURL" :contain="true" :src="imageURL" height="300"></v-img>
 
       <v-card-text class="desc">
@@ -33,6 +35,7 @@
 
 <script>
 import { eventBus } from '@/main.js';
+import LaunchMap from '@/components/LaunchMap';
 
 export default {
   name: 'LaunchPopup',
@@ -41,6 +44,9 @@ export default {
       launch: null,
       dialog: false
     }
+  },
+  components: {
+    'launch-map': LaunchMap
   },
   computed: {
     imageURL() {
