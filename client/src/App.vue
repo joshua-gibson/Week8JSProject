@@ -1,42 +1,29 @@
 <template>
   <div id="app">
-    <h1>Launches!</h1>
-    <launch-timeline :launches="launches" />
+    <launch-splash />
+    <launch-popup />
+    <launch-timeline />
   </div>
 </template>
 
 <script>
-import APIservice from '@/services/APIService.js'
-import LaunchTimeline from '@/components/LaunchTimeline.vue'
+import LaunchTimeline from '@/components/LaunchTimeline.vue';
+import LaunchSplash from '@/components/LaunchSplash.vue';
+import LaunchPopup from '@/components/LaunchPopup.vue';
+
+
 export default {
   name: 'app',
-  components: { 'launch-timeline': LaunchTimeline },
-  data() {
-    return {
-      launches: []
-    }
-  },
-  mounted() {
-    this.fetchData()
-  },
-  methods: {
-    fetchData(){
-      APIservice.getLaunches()
-      .then(launches => this.launches = launches.launches);
-    }
+  components: {
+    'launch-timeline': LaunchTimeline,
+    'launch-splash': LaunchSplash,
+    'launch-popup': LaunchPopup,
   }
 }
 </script>
 
 <style>
 
-h1 {
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 40px;
-}
 
-#app {
-  padding: 20px;
-}
 
 </style>

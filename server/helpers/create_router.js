@@ -1,12 +1,24 @@
 const express = require('express');
-const ObjectID = require('mongodb').ObjectID;
+const { ObjectID } = require('mongodb');
+const fetch = require('node-fetch');
 
 const createRouter = function (collection) {
 
   const router = express.Router();
 
-  router.get('/', (req, res) => {
-    collection
+  router.get('/:startDate/:endDate', (req, res) => {
+    const baseURL = `https://launchlibrary.net/1.4/launch`
+    const limit = 100;
+    const startDate = req.params.startDate;
+    const endDate = req.params.endDate;
+    const apiURL = `${baseURL}/${startDate}/${endDate}?limit=${limit}`
+    fetch(apiURL)
+      .then(apiRes => apiRes.json())
+      .then(json => res.json(json));
+    
+    // TODO: Caching
+    /*
+     collection
     .find()
     .toArray()
     .then((docs) => res.json(docs))
@@ -15,6 +27,8 @@ const createRouter = function (collection) {
       res.status(500);
       res.json({ status: 500, error: err });
     });
+    */
+
   });
 
   return router;

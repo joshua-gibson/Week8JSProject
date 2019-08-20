@@ -8,7 +8,10 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "leaflet": "^1.5.1",
     "vue": "^2.6.10",
+    "vue-videobg": "^2.0.0",
+    "vue2-leaflet": "^2.2.1",
     "vuetify": "^2.0.0"
   },
   "devDependencies": {
