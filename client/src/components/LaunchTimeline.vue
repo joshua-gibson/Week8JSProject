@@ -70,6 +70,7 @@ export default {
 .tl-container {
   display: flex;
   justify-content: center;
+  padding-top: 50px;
 }
 
 .tl {
