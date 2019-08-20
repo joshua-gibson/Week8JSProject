@@ -39,7 +39,7 @@ export default {
     formattedDate(isonetString) {
       const monthArr = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       const lDate = new Date(isonetString.substring(0,4), parseInt(isonetString.substring(4,6),10) - 1, isonetString.substring(6,8));
-      return `${monthArr[lDate.getMonth()]} ${lDate.getDate()}`;
+      return `${lDate.getFullYear()} ${monthArr[lDate.getMonth()]} ${lDate.getDate()}`;
     }
   },
   data() { return { popup: false } }, 
