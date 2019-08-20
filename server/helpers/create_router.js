@@ -12,17 +12,24 @@ const createRouter = function (collection) {
     const startDate = req.params.startDate;
     const endDate = req.params.endDate;
     const apiURL = `${baseURL}/${startDate}/${endDate}?limit=${limit}`
+    
 
+    // TODO: Dynamic fetching from the API
     /*
     fetch(apiURL)
       .then(apiRes => apiRes.json())
       .then(json => res.json(json));
     */
 
+    const startJSDate = new Date(startDate);
+    const endJSDate = new Date(endDate);
+    console.log(`Finding from ${startJSDate} to ${endJSDate}`);
+
+    collection
     .find({
-      isonet: {
-        $gte: ISODate(startDate),
-        $lte: ISODate(endDate)
+      jsDate: {
+        $gt: startJSDate,
+        $lt: endJSDate
       }
     })
     .toArray()
@@ -32,7 +39,6 @@ const createRouter = function (collection) {
       res.status(500);
       res.json({ status: 500, error: err });
     });
-    */
 
   });
 
