@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" max-width="600">
+  <v-dialog v-model="dialog" max-width="1000">
     <v-card v-if="launch" class="mx-auto">
       <v-list-item>
         <v-list-item-content>
@@ -21,9 +21,16 @@
         </v-list-item-content>
       </v-list-item>
 
-      <launch-map v-if="launch.location.pads" :pad="launch.location.pads[0]"/>
-
-    <v-img v-if="imageURL" :contain="true" :src="imageURL" height="300"></v-img>
+      <v-container>
+        <v-row justify="center">
+          <v-col>
+            <launch-map v-if="launch.location.pads" :pad="launch.location.pads[0]"/>
+          </v-col>
+          <v-col>
+            <v-img v-if="imageURL" :contain="true" :src="imageURL" :max-width="400"/>
+          </v-col>
+        </v-row>
+      </v-container>
 
       <v-card-text class="desc">
         {{ launch.missions[0].description }}
@@ -39,14 +46,14 @@ import LaunchMap from '@/components/LaunchMap';
 
 export default {
   name: 'LaunchPopup',
+  components: {
+    'launch-map': LaunchMap
+  },
   data() {
     return {
       launch: null,
       dialog: false
     }
-  },
-  components: {
-    'launch-map': LaunchMap
   },
   computed: {
     imageURL() {
@@ -66,7 +73,7 @@ export default {
 </script>
 
 <style>
-  .desc {
-    margin-top: 1em;
-  }
+.desc {
+  margin-top: 1em;
+}
 </style>
