@@ -9,7 +9,6 @@ var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 let completeLaunchData = [];
 
-
 urls = [];
 for (i = 0; i < 170; i++) {
   urls.push(`https://launchlibrary.net/1.4/launch?sort=%27ascending%27&offset=${i}0`);
@@ -38,13 +37,14 @@ Promise.all(promises)
         completeLaunchData = completeLaunchData.flat();
         // console.log(completeLaunchData);
       })
+      .catch(err => console.log(err));
     })
   })
   .then((res)=>{
     MongoClient.connect(url, function(err, db) {
       if (err) throw err;
-      var dbo = db.db("mydb");
-      dbo.collection("launches").insertMany(completeLaunchData, function(err, res) {
+      var dbo = db.db("launches");
+      dbo.collection("launch_items").insertMany(completeLaunchData, function(err, res) {
         if (err) throw err;
         console.log("Number of documents inserted: " + res.insertedCount);
         db.close();
