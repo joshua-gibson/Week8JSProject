@@ -69,11 +69,13 @@ export default {
 <style lang="css" scoped>
 .tl-container {
   display: flex;
+  justify-content: center;
 }
 
 .tl {
   font-family: 'Josefin Sans', sans-serif;
   background-color: white;
+
 }
 
 </style>

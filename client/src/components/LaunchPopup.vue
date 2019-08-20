@@ -29,6 +29,7 @@
 
     </v-card>
   </v-dialog>
+</div>
 </template>
 
 <script>
@@ -63,4 +64,5 @@ export default {
   .desc {
     margin-top: 1em;
   }
+
 </style>
