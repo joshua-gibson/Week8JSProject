@@ -9,20 +9,7 @@ const getDateString = (date) => {
 };
 
 export default {
-<<<<<<< HEAD
-  getLaunches(){
-    return fetch(baseURL)
-    .then(res=>res.json())
-},
-postLaunch(payload){
-  return fetch(baseURL, {
-    method: 'POST',
-    body: JSON.stringify(payload),
-    headers: { 'Content-Type': 'application/json'}
-  })
-  .then(res => res.json())
-}}
-=======
+
   getLaunches(date) {
   const endDate = new Date(date);
   endDate.setDate(endDate.getDate() + daysToAdd);
@@ -30,4 +17,3 @@ postLaunch(payload){
     return fetch(`${baseURL}`).then(res=>res.json());
   }
 }
->>>>>>> development
