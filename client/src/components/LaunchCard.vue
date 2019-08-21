@@ -6,7 +6,10 @@
     <v-hover v-slot:default="{ hover }">
     <v-card :elevation="hover ? 12 : 2">
       <v-card-title class="tl cardTitle">
-        {{ launch.name }}
+        <div class="">
+          {{ launch.name }}
+        </div>
+        <img v-bind:src="flagURL" alt="flag" class="flagImg">
       </v-card-title>
       <v-row>
         <v-col cols="12" md="10">
@@ -45,11 +48,14 @@ export default {
     }
   },
   data() { return { popup: false } },
-  props: ['launch'],
+  props: ['launch', 'flagList'],
   computed: {
     moreInfoAvailable() {
       if (this.launch.missions.length > 0) return true;
       return false;
+    },
+    flagURL() {
+      return this.flagList.find(e => e.alphaCode = this.launch.lsp.countryCode).flag;
     }
   },
   methods: {
@@ -84,6 +90,10 @@ export default {
   font-weight: 1000;
   margin: 1px;
   padding: 1px;
+}
+
+.flagImg {
+  width: 50px;
 }
 
 .itemLabel {

@@ -4,7 +4,7 @@
       <div class="tl-container">
         <v-app id="inspire">
           <v-timeline class="tl" :reverse="true">
-            <launch-card v-for="(launch, index) in launches" :launch="launch" :key="index" />
+            <launch-card v-for="(launch, index) in launches" :launch="launch" :flagList="flagList" :key="index" />
           </v-timeline>
         </v-app>
       </div>
