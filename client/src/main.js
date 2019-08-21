@@ -20,11 +20,3 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
-
-Vue.filter('two_digits', function (value) {
-    if(value.toString().length <= 1)
-    {
-        return "0"+value.toString();
-    }
-    return value.toString();
-});

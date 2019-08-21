@@ -1,15 +1,17 @@
 <template>
+
   <div :style="{ height: splashHeight }">
+    <video loop muted autoplay poster="../assets/spaceshuttle.jpg" class="videoBg">
+      <source src="../assets/shuttlecinemagraph.mp4" type="video/mp4">
+    </video>
+    <h1>Nova.</h1>
+    <h3>The Future of Space Agency Launches</h3>
+  </div>
 
-        <video loop muted autoplay poster="../assets/spaceshuttle.jpg" class="videoBg">
-            <source src="../assets/shuttlecinemagraph.mp4" type="video/mp4">
-        </video>
-      <h1>Nova.</h1>
-      <h3>The Future of Space Agency Launches</h3>
-      
-<launch-countdown date="August 25, 2019"></launch-countdown>
 
-</div>
+
+
+
 
 <!-- <div class="countdown"> -->
 
@@ -35,7 +37,6 @@ export default {
 </script>
 
 <style>
-
 h1, h3 {
   font-family: 'Josefin Sans', sans-serif;
 }
@@ -77,8 +78,9 @@ h3 {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    z-index: 0;
 }
-/* .countdown{
+/* #app{
     align-items: center;
     bottom: 0;
     background-color: #34495e;

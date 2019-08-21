@@ -23,17 +23,15 @@
 <script>
 export default {
   name: 'LaunchCountdown',
-
     /* ready function will be here */
     ready() {
     window.setInterval(() => {
         this.now = Math.trunc((new Date()).getTime() / 1000);
     },1000);
   },
-    props : {
-        date : {
-            type: Number,
-            coerce: str => Math.trunc(Date.parse(str) / 1000)
+    props: {
+        date: {
+            type: Number
         }
     },
     data() {
@@ -41,24 +39,31 @@ export default {
             now: Math.trunc((new Date()).getTime() / 1000)
         }
     },
+    filters: {
+      two_digits: function (value) {
+        if(value.toString().length <= 1) {
+            return "0"+value.toString();
+        }
+        return value.toString();
+      }
+    },
     computed: {
-    seconds() {
-        return (this.date - this.now) % 60;
-    },
+      seconds() {
+          return (this.date - this.now) % 60;
+      },
 
-    minutes() {
-        return Math.trunc((this.date - this.now) / 60) % 60;
-    },
+      minutes() {
+          return Math.trunc((this.date - this.now) / 60) % 60;
+      },
 
-    hours() {
-        return Math.trunc((this.date - this.now) / 60 / 60) % 24;
-    },
+      hours() {
+          return Math.trunc((this.date - this.now) / 60 / 60) % 24;
+      },
 
-    days() {
-        return Math.trunc((this.date - this.now) / 60 / 60 / 24);
+      days() {
+          return Math.trunc((this.date - this.now) / 60 / 60 / 24);
+      }
     }
-  }
-    /* Computed properties will be here */
 }
 
 </script>
@@ -71,7 +76,9 @@ export default {
     display: flex;
     flex-direction: column;
     margin: 20px;
-
+    z-index: 1;
+    position: absolute;
+    z-index: -1;
 }
 
 .text {
