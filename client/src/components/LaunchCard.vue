@@ -3,7 +3,8 @@
     <template v-slot:opposite>
       <span class="opYear">{{ launch.isonet | formattedDate }}</span>
     </template>
-    <v-card>
+    <v-hover v-slot:default="{ hover }">
+    <v-card :elevation="hover ? 12 : 2">
       <v-card-title class="tl cardTitle">
         {{ launch.name }}
       </v-card-title>
@@ -19,7 +20,7 @@
           </v-card-text>
           <v-card-text>
             <span class="itemLabel">Location: </span>
-            <span>{{ launch.location.pads[0].name }}</span> 
+            <span>{{ launch.location.pads[0].name }}</span>
           </v-card-text>
         </v-col>
       </v-row>
@@ -27,6 +28,7 @@
         <v-btn :block="true" @click="showMoreInfo">More Info</v-btn>
       </div>
     </v-card>
+  </v-hover>
   </v-timeline-item>
 </template>
 
@@ -39,10 +41,10 @@ export default {
     formattedDate(isonetString) {
       const monthArr = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       const lDate = new Date(isonetString.substring(0,4), parseInt(isonetString.substring(4,6),10) - 1, isonetString.substring(6,8));
-      return `${monthArr[lDate.getMonth()]} ${lDate.getDate()}`;
+      return `${lDate.getFullYear()} ${monthArr[lDate.getMonth()]} ${lDate.getDate()}`;
     }
   },
-  data() { return { popup: false } }, 
+  data() { return { popup: false } },
   props: ['launch'],
   computed: {
     moreInfoAvailable() {

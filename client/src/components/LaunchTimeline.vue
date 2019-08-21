@@ -1,40 +1,56 @@
 <template lang="html">
   <div>
-    <div class="tl-container">
-      <v-app id="inspire">
-        <v-timeline class="tl" :reverse="true">
-          <launch-card v-for="(launch, index) in launches" :launch="launch" :key="index" />
-        </v-timeline>
-      </v-app>
-    </div>
-    <bottom-spinner :loading="loading"/>
+    <nav-bar />
+      <div class="tl-container">
+        <v-app id="inspire">
+          <v-timeline class="tl" :reverse="true">
+            <launch-card v-for="(launch, index) in launches" :launch="launch" :key="index" />
+          </v-timeline>
+        </v-app>
+      </div>
+      <bottom-spinner :loading="loading"/>
   </div>
 </template>
 
 <script>
+import NavBar from '@/components/NavBar.vue';
 import APIservice from '@/services/APIService.js';
 import LaunchCard from '@/components/LaunchCard.vue';
 import BottomSpinner from '@/components/BottomSpinner.vue';
+import { eventBus } from '@/main.js';
 
 export default {
   name: 'LaunchTimeline',
   components: {
     'launch-card': LaunchCard,
-    'bottom-spinner': BottomSpinner
+    'bottom-spinner': BottomSpinner,
+    'nav-bar': NavBar
   },
   data() {
     return {
       launches: [],
       bottom: false,
       loading: false,
-      currDate: null
+      sDate: '',
+      eDate: '',
+      scrollDateStart: ''
+    }
+  },
+  watch: {
+    bottom(bottom) {
+      this.addData();
     }
   },
   mounted() {
-    this.currDate = new Date();
-    this.fetchData()
     window.addEventListener('scroll', () => {
       this.bottom = this.bottomVisible();
+    });
+
+    eventBus.$on('date-update', (payload) => {
+      this.sDate = payload.sDate;
+      this.scrollDateStart = payload.sDate;
+      this.eDate = payload.eDate;
+      this.refreshData();
     });
   },
   methods: {
@@ -45,24 +61,30 @@ export default {
       const bottomOfPage = visible + scrollY >= pageHeight;
       return bottomOfPage || pageHeight < visible;
     },
-    fetchData(){
+
+    refreshData() {
+      this.launches = [];
       this.loading = true;
-      APIservice.getLaunches(this.currDate)
+      APIservice.getLaunches(this.sDate, this.eDate)
         .then(launches => {
           this.loading = false;
-          this.launches = this.launches.concat(launches.launches);
+          this.launches = launches.launches;
         });
+    },
+
+    addData() {
+      const offsetDate = new Date(this.scrollDateStart);
+      offsetDate.setDate(offsetDate.getDate() + 30);
+      const offsetDateStr = offsetDate.toISOString().substring(0, 10);
+      this.loading = true;
+      APIservice.getLaunches(this.scrollDateStart, offsetDateStr)
+        .then(newLaunches => {
+          this.loading = false;
+          this.launches = this.launches.concat(newLaunches.launches);
+          this.scrollDateStart = offsetDateStr;
+        })
     }
   },
-  watch: {
-    bottom(bottom) {
-      if (bottom) {
-        console.log('At bottom');
-        this.fetchData();
-        this.currDate.setDate(this.currDate.getDate() + 20);
-      }
-    }
-  }
 }
 </script>
 
