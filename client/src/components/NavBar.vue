@@ -31,9 +31,6 @@ export default {
       this.eDate = endDate.toISOString().substring(0, 10);
       eventBus.$emit('date-update', {'sDate': this.sDate, 'eDate': this.eDate });
     });
-    eventBus.$on('scroll-update', () => {
-      console.log('update');
-    });
   },
   methods: {
     handleSubmit() {

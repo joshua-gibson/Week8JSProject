@@ -6,7 +6,7 @@
       style="height: 100%; width: 100%"
       >
       <l-tile-layer :url="url"/>
-        <l-marker :lat-lng="center"/>
+      <l-marker :lat-lng="center"/>
     </l-map>
   </div>
 
@@ -24,15 +24,15 @@ export default {
   },
   data(){
     return {
-      center: [],
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
     }
   },
   props: ['pad'],
-  mounted() {
-    this.center = [this.pad.latitude, this.pad.longitude];
+  computed: {
+  center: function () {
+      return [this.pad.latitude, this.pad.longitude];
+    }
   }
-
 }
 
 
