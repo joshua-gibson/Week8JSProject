@@ -1,7 +1,7 @@
 <template lang="html">
 <div class="map-wrapper">
   <l-map
-  :zoom="3"
+  :zoom="5"
   :center="center"
   style="height: 100%; width: 100%"
   >
@@ -44,7 +44,7 @@ mounted() {
 
 <style lang="css" scoped>
 .map-wrapper{
-  height: 200px;
-  width: 200px;
+  height: 300px;
+  width: 900px;
 }
 </style>

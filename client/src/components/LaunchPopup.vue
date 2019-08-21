@@ -1,7 +1,9 @@
 <template>
-  <v-dialog v-model="dialog" max-width="800" class="dialogObj">
+  <v-dialog v-model="dialog" max-width="900" class="dialogObj">
     <v-card v-if="launch" class="mx-auto">
       <v-list-item class="topContainer">
+        <v-img class="imgItem" v-if="imageURL" :contain="true" :src="imageURL" ></v-img>
+        <div class="header">
         <v-list-item-content>
           <v-list-item-title class="headline">
             {{ launch.missions[0].name }}
@@ -19,16 +21,19 @@
             {{ launch.location.name }}
           </v-list-item-subtitle>
         </v-list-item-content>
+        </div>
       </v-list-item>
 
       <div class="bottomContainer">
-        <launch-map class="mapItem" v-if="launch.location.pads" :pad="launch.location.pads[0]"/>
 
-      <v-img class="imgItem" v-if="imageURL" :contain="true" :src="imageURL" height="300"></v-img>
+
 
         <v-card-text class="descItem">
           {{ launch.missions[0].description }}
         </v-card-text>
+
+        <launch-map class="mapItem" v-if="launch.location.pads" :pad="launch.location.pads[0]"/>
+
     </div>
     </v-card>
   </v-dialog>
@@ -72,44 +77,67 @@ export default {
 
 
 .topContainer {
+    /* border: 2px solid green; */
 display: flex;
-width: 300px;
-border: 2px solid red;
+  justify-content: flex-start;
+
+
 }
+
+.header {
+  /* border: 2px solid green; */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 750px;
+  align-self: flex-start;
+}
+
 
 .headline {
   background-color: orange;
   color: white;
-  width: 500px;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .bottomContainer {
 display: flex;
-flex-direction: row;
-flex-grow: 1;
-justify-content: space-between;
-width: 500px;
-border: 2px solid red;
+justify-content: flex-start;
+align-self: flex-start;
+flex-direction: column;
+flex-wrap: wrap;
+width: 900px;
+
 }
 
 .mapItem {
   display: flex;
-  border: 2px solid green;
-  height: 300px;
-    width: 300px;
+  /* border: 2px solid green; */
+    width: 900px;
+    height: 300px;
+    padding: 2px;
+    margin: 2px;
 }
 
 .imgItem {
   display: flex;
-  border: 2px solid blue;
-  height: 300px;
-  width: 300px;
+  /* border: 2px solid blue; */
+  height: 100px;
+  width: 100px;
+  padding: 2px;
+  margin: 2px;
 }
 
 .descItem{
   display: flex;
-  border: 2px solid orange;
-  width: 300px;
+  /* border: 2px solid orange; */
+  vertical-align: text-bottom;
+  align-self: flex-end;
+  width: 900px;
+  padding: 2px;
+  margin: 2px;
 }
 
 </style>
