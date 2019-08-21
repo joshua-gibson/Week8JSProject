@@ -33,7 +33,8 @@ export default {
       loading: false,
       sDate: '',
       eDate: '',
-      scrollDateStart: ''
+      scrollDateStart: '',
+      flagList: []
     }
   },
   watch: {
@@ -52,6 +53,12 @@ export default {
       this.eDate = payload.eDate;
       this.refreshData();
     });
+
+    fetch('https://restcountries.eu/rest/v2/all')
+    .then(res => res.json())
+    .then(res => {
+      res.map(x=>this.flagList.push({alphaCode: x.alpha3Code, flag: x.flag}));
+    })
   },
   methods: {
     bottomVisible() {
