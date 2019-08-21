@@ -55,7 +55,7 @@ export default {
       return false;
     },
     flagURL() {
-      return this.flagList.find(e => e.alphaCode = this.launch.lsp.countryCode).flag;
+      return this.flagList.find(e => e.alphaCode === this.launch.lsp.countryCode).flag;
     }
   },
   methods: {
