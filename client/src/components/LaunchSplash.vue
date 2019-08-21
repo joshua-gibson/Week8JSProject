@@ -4,7 +4,7 @@
       <source src="../assets/shuttlecinemagraph.mp4" type="video/mp4">
     </video>
     <h1>Nova.</h1>
-    <h3>The Future of Space Agency Launches</h3>
+    <h3>The History and Future of Spaceflight</h3>
     <launch-countdown />
   </div>
 </template>
@@ -51,35 +51,35 @@ h3 {
 }
 
 /* .videoBgWrapper {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow: hidden;
-    z-index: -100;
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+overflow: hidden;
+z-index: -100;
 } */
 
 .videoBg{
-    position:absolute;
-    object-fit: fill;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 0;
+  position:absolute;
+  object-fit: fill;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
 }
 /* #app{
-    align-items: center;
-    bottom: 0;
-    background-color: #34495e;
-    display: flex;
-    justify-content: center;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top:0;
+align-items: center;
+bottom: 0;
+background-color: #34495e;
+display: flex;
+justify-content: center;
+left: 0;
+position: absolute;
+right: 0;
+top:0;
 } */
 
 </style>

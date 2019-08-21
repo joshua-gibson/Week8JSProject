@@ -4,7 +4,7 @@
       <div class="tl-container">
         <v-app id="inspire">
           <v-timeline class="tl" :reverse="true">
-            <launch-card v-for="(launch, index) in launches" :launch="launch" :key="index" />
+            <launch-card v-for="(launch, index) in launches" :launch="launch" :flagList="flagList" :key="index" />
           </v-timeline>
         </v-app>
       </div>
@@ -34,7 +34,8 @@ export default {
       sDate: '',
       eDate: '',
       scrollDateStart: '',
-      isInitialLoad: true
+      isInitialLoad: true,
+      flagList: []
     }
   },
   watch: {
@@ -53,6 +54,12 @@ export default {
       this.eDate = payload.eDate;
       this.refreshData();
     });
+
+    fetch('https://restcountries.eu/rest/v2/all')
+    .then(res => res.json())
+    .then(res => {
+      res.map(x=>this.flagList.push({alphaCode: x.alpha3Code, flag: x.flag}));
+    })
   },
   methods: {
     bottomVisible() {
@@ -86,7 +93,10 @@ export default {
         .then(newLaunches => {
           this.loading = false;
           this.launches = this.launches.concat(newLaunches);
-          this.scrollDateStart = offsetDateStr;
+
+          const newScrollDate = offsetDate;
+          newScrollDate.setDate(newScrollDate.getDate() + 1)
+          this.scrollDateStart = newScrollDate.toISOString().substring(0, 10);
         })
     }
   },
