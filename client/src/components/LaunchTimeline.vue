@@ -33,7 +33,8 @@ export default {
       loading: false,
       sDate: '',
       eDate: '',
-      scrollDateStart: ''
+      scrollDateStart: '',
+      isInitialLoad: true
     }
   },
   watch: {
@@ -69,6 +70,10 @@ export default {
         .then(launches => {
           this.loading = false;
           this.launches = launches;
+          if (this.isInitialLoad) {
+            eventBus.$emit('initial-launch-time', launches[0].netstamp);
+            this.isInitialLoad = false;
+          }
         });
     },
 

@@ -1,22 +1,12 @@
 <template>
-
   <div :style="{ height: splashHeight }">
     <video loop muted autoplay poster="../assets/spaceshuttle.jpg" class="videoBg">
       <source src="../assets/shuttlecinemagraph.mp4" type="video/mp4">
     </video>
     <h1>Nova.</h1>
     <h3>The Future of Space Agency Launches</h3>
+    <launch-countdown />
   </div>
-
-
-
-
-
-
-<!-- <div class="countdown"> -->
-
-<!-- </div> -->
-
 </template>
 
 <script>

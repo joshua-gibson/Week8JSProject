@@ -1,102 +1,42 @@
 <template lang="html">
-
- <div class="addlater">
-  <div class="block">
-       <p class="digit">{{ days | two_digits }}</p>
-       <p class="text">Days</p>
-   </div>
-   <div class="block">
-       <p class="digit">{{ hours | two_digits }}</p>
-       <p class="text">Hours</p>
-   </div>
-   <div class="block">
-       <p class="digit">{{ minutes | two_digits }}</p>
-       <p class="text">Minutes</p>
-   </div>
-   <div class="block">
-       <p class="digit">{{ seconds | two_digits }}</p>
-       <p class="text">Seconds</p>
-   </div>
- </div>
+  <h3>
+    Countdown to next launch:
+    {{ launchText }}
+  </h3>
 </template>
 
 <script>
+import { eventBus } from '@/main.js';
 export default {
   name: 'LaunchCountdown',
-    /* ready function will be here */
-    ready() {
+  mounted() {
+    eventBus.$on('initial-launch-time', ((launchTime) => {
+      this.launchTime = launchTime;
+      this.nowTime = new Date().getTime();
+    }));
     window.setInterval(() => {
-        this.now = Math.trunc((new Date()).getTime() / 1000);
+      this.nowTime = new Date().getTime();
+      this.timeTilLaunch = this.launchTime - this.nowTime;
+      const timerDate = new Date(this.timeTilLaunch);
+      const seconds = timerDate.getSeconds();
+      const minutes = timerDate.getMinutes();
+      const hours =  timerDate.getHours();
+      const days = timerDate.getDay();
+      this.launchText = `${days} Days ${hours} Hours, ${minutes} Mins, ${seconds} Secs`;
     },1000);
   },
-    props: {
-        date: {
-            type: Number
-        }
-    },
-    data() {
-        return {
-            now: Math.trunc((new Date()).getTime() / 1000)
-        }
-    },
-    filters: {
-      two_digits: function (value) {
-        if(value.toString().length <= 1) {
-            return "0"+value.toString();
-        }
-        return value.toString();
-      }
-    },
-    computed: {
-      seconds() {
-          return (this.date - this.now) % 60;
-      },
-
-      minutes() {
-          return Math.trunc((this.date - this.now) / 60) % 60;
-      },
-
-      hours() {
-          return Math.trunc((this.date - this.now) / 60 / 60) % 24;
-      },
-
-      days() {
-          return Math.trunc((this.date - this.now) / 60 / 60 / 24);
-      }
+  data() {
+    return {
+      now: Math.trunc((new Date()).getTime() / 1000),
+      date: null,
+      launchTime: 0,
+      nowTime: 0,
+      timeTilLaunch: 0,
+      launchText: ''
     }
+  }
 }
-
 </script>
 
 <style lang="css" scoped>
-
-@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400|Roboto:100);
-
-.block {
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
-    z-index: 1;
-    position: absolute;
-    z-index: -1;
-}
-
-.text {
-    color: #1abc9c;
-    font-size: 20px;
-    font-family: 'Roboto Condensed', serif;
-    font-weight: 40;
-    margin-top:10px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.digit {
-    color: #ecf0f1;
-    font-size: 150px;
-    font-weight: 100;
-    font-family: 'Roboto', serif;
-    margin: 10px;
-    text-align: center;
-}
 </style>
