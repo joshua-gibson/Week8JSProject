@@ -4,9 +4,9 @@
       <span class="opYear">{{ launch.isonet | formattedDate }}</span>
     </template>
     <v-hover v-slot:default="{ hover }">
-    <v-card :elevation="hover ? 12 : 2">
-      <v-card-title class="tl cardTitle">
-        <div class="">
+    <v-card class="cardBody" :elevation="hover ? 12 : 2">
+      <v-card-title class="cardTitle">
+        <div class="lName">
           {{ launch.name }}
         </div>
         <img v-bind:src="flagURL" alt="flag" class="flagImg">
@@ -68,19 +68,32 @@ export default {
 
 <style>
 .cardTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: nowrap;
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 14px;
   margin: 0px;
   padding: 5px;
   background-color: orange;
   color: white;
+  /* border: 2px solid red; */
+
+}
+
+.lName {
+/* border: 2px solid green; */
+font-size: 20px;
+font-weight: 1000;
+width: 400px;
+
 }
 
 .cardBody {
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 14px;
   margin: 2px;
   padding: 1px;
+  width: 800px;
 }
 
 .opYear {
@@ -98,5 +111,6 @@ export default {
 
 .itemLabel {
   font-weight: bold;
+  font-size: 18px;
 }
 </style>
