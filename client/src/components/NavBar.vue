@@ -1,34 +1,47 @@
 <template lang="html">
-<nav class="NavContainer">
-  <form v-on:submit.prevent class="navForm" action="index.html" method="post">
-    <label class="labels" for="start-date">Start Date: </label>
-    <input type="date" class="DatePicker" v-model="sdate" name="start-date">
-    <label class="labels" for="end-date">End Date: </label>
-    <input type="date" class="DatePicker" v-model="edate" name="end-date">
-    <input type="submit" class="button" v-on:click="goroute" name="" value="submit">
-  </form>
-</nav>
+  <nav class="NavContainer">
+    <form @submit.prevent="handleSubmit" class="navForm" method="post">
+      <label class="labels" for="start-date">Start Date: </label>
+      <input type="date" class="DatePicker" v-model="sDate" name="start-date">
+      <label class="labels" for="end-date">End Date: </label>
+      <input type="date" class="DatePicker" v-model="eDate" name="end-date">
+      <input type="submit" class="button" value="submit">
+    </form>
+  </nav>
 </template>
 
 <script>
-import APIservice from '@/services/APIService.js';
+import { eventBus } from '@/main.js';
+
 export default {
-  name: 'nav-bar',
+  name: 'NavBar',
   data() {
     return{
-    sdate: "2019-08-22",
-    edate: "2019-08-30"
-  }
+      sDate: '',
+      eDate: ''
+    }
+  },
+  mounted() {
+    // This has to fire after the entire view is rendered
+    this.$nextTick(() => {
+      const currDate = new Date();
+      const endDate = new Date(currDate);
+      endDate.setDate(endDate.getDate() + 30);
+      this.sDate = currDate.toISOString().substring(0, 10);
+      this.eDate = endDate.toISOString().substring(0, 10);
+      eventBus.$emit('date-update', {'sDate': this.sDate, 'eDate': this.eDate });
+    });
   },
   methods: {
-    goroute() {
-      window.location.href = `http://localhost:8080/${this.sdate}/${this.edate}`;
+    handleSubmit() {
+      eventBus.$emit('date-update', {'sDate': this.sDate, 'eDate': this.eDate });
     }
   }
 }
 </script>
 
 <style lang="css" scoped>
+
 .NavContainer{
   font-family: 'Josefin Sans', sans-serif;
   display: flex;
@@ -54,7 +67,6 @@ export default {
   align-items: center;
 }
 
-
 .button {
   background-color: #fcba03;
   border: none;
@@ -79,6 +91,4 @@ export default {
   text-align: center;
   margin-top: 20px;
 }
-
-
 </style>

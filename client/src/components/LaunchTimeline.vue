@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <nav-bar/>
+    <nav-bar />
     <div class="tl-container">
       <v-app id="inspire">
         <v-timeline class="tl" :reverse="true">
@@ -17,6 +17,7 @@ import NavBar from '@/components/NavBar.vue';
 import APIservice from '@/services/APIService.js';
 import LaunchCard from '@/components/LaunchCard.vue';
 import BottomSpinner from '@/components/BottomSpinner.vue';
+import { eventBus } from '@/main.js';
 
 export default {
   name: 'LaunchTimeline',
@@ -30,14 +31,25 @@ export default {
       launches: [],
       bottom: false,
       loading: false,
-      currDate: null
+      sDate: '',
+      eDate: '',
+    }
+  },
+  watch: {
+    bottom(bottom) {
+      console.log('at bottom');
     }
   },
   mounted() {
-    this.currDate = new Date();
-    this.fetchData()
     window.addEventListener('scroll', () => {
       this.bottom = this.bottomVisible();
+    });
+
+    eventBus.$on('date-update', (payload) => {
+      this.launches = [];
+      this.sDate = payload.sDate;
+      this.eDate = payload.eDate;
+      this.refreshData();
     });
   },
   methods: {
@@ -48,24 +60,16 @@ export default {
       const bottomOfPage = visible + scrollY >= pageHeight;
       return bottomOfPage || pageHeight < visible;
     },
-    fetchData(){
+
+    refreshData(){
       this.loading = true;
-      APIservice.getLaunches(this.currDate)
+      APIservice.getLaunches(this.sDate, this.eDate)
         .then(launches => {
           this.loading = false;
-          this.launches = this.launches.concat(launches.launches);
+          this.launches = launches.launches;
         });
     }
   },
-  watch: {
-    bottom(bottom) {
-      if (bottom) {
-        console.log('At bottom');
-        this.fetchData();
-        this.currDate.setDate(this.currDate.getDate() + 20);
-      }
-    }
-  }
 }
 </script>
 
