@@ -6,7 +6,7 @@
 
 const fetch = require("node-fetch");
 const MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+const url = "mongodb://localhost:27017/";
 
 let completeLaunchData = [];
 
@@ -14,7 +14,7 @@ fetch('https://launchlibrary.net/1.4/launch/1960-01-01/2019-01-01?limit=100000')
 .then(res => res.json())
   .then(res =>completeLaunchData = res.launches)
   .then((res)=>{
-    MongoClient.connect(url, function(err, db) {
+    MongoClient.connect(url, (err, db) => {
       if (err) throw err;
 
       // Turn the dates into js objects
@@ -25,7 +25,8 @@ fetch('https://launchlibrary.net/1.4/launch/1960-01-01/2019-01-01?limit=100000')
         return newLaunch;
       });
 
-      var dbo = db.db("launches");
+      const dbo = db.db("launches");
+      dbo.collection('launch_items').drop();
       dbo.collection("launch_items").insertMany(completeLaunchData, function(err, res) {
         if (err) throw err;
         console.log("Number of documents inserted: " + res.insertedCount);
@@ -33,5 +34,4 @@ fetch('https://launchlibrary.net/1.4/launch/1960-01-01/2019-01-01?limit=100000')
       })
     })
   })
-
   .catch(err => console.log(err));
