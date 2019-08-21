@@ -1,14 +1,14 @@
 <template lang="html">
   <div>
     <nav-bar />
-    <div class="tl-container">
-      <v-app id="inspire">
-        <v-timeline class="tl" :reverse="true">
-          <launch-card v-for="(launch, index) in launches" :launch="launch" :key="index" />
-        </v-timeline>
-      </v-app>
-    </div>
-    <bottom-spinner :loading="loading"/>
+      <div class="tl-container">
+        <v-app id="inspire">
+          <v-timeline class="tl" :reverse="true">
+            <launch-card v-for="(launch, index) in launches" :launch="launch" :key="index" />
+          </v-timeline>
+        </v-app>
+      </div>
+      <bottom-spinner :loading="loading"/>
   </div>
 </template>
 
@@ -33,11 +33,12 @@ export default {
       loading: false,
       sDate: '',
       eDate: '',
+      scrollDateStart: ''
     }
   },
   watch: {
     bottom(bottom) {
-      console.log('at bottom');
+      this.addData();
     }
   },
   mounted() {
@@ -46,8 +47,8 @@ export default {
     });
 
     eventBus.$on('date-update', (payload) => {
-      this.launches = [];
       this.sDate = payload.sDate;
+      this.scrollDateStart = payload.sDate;
       this.eDate = payload.eDate;
       this.refreshData();
     });
@@ -61,13 +62,27 @@ export default {
       return bottomOfPage || pageHeight < visible;
     },
 
-    refreshData(){
+    refreshData() {
+      this.launches = [];
       this.loading = true;
       APIservice.getLaunches(this.sDate, this.eDate)
         .then(launches => {
           this.loading = false;
           this.launches = launches.launches;
         });
+    },
+
+    addData() {
+      const offsetDate = new Date(this.scrollDateStart);
+      offsetDate.setDate(offsetDate.getDate() + 30);
+      const offsetDateStr = offsetDate.toISOString().substring(0, 10);
+      this.loading = true;
+      APIservice.getLaunches(this.scrollDateStart, offsetDateStr)
+        .then(newLaunches => {
+          this.loading = false;
+          this.launches = this.launches.concat(newLaunches.launches);
+          this.scrollDateStart = offsetDateStr;
+        })
     }
   },
 }
