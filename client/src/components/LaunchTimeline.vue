@@ -68,7 +68,7 @@ export default {
       APIservice.getLaunches(this.sDate, this.eDate)
         .then(launches => {
           this.loading = false;
-          this.launches = launches.launches;
+          this.launches = launches;
         });
     },
 
@@ -80,7 +80,7 @@ export default {
       APIservice.getLaunches(this.scrollDateStart, offsetDateStr)
         .then(newLaunches => {
           this.loading = false;
-          this.launches = this.launches.concat(newLaunches.launches);
+          this.launches = this.launches.concat(newLaunches);
           this.scrollDateStart = offsetDateStr;
         })
     }

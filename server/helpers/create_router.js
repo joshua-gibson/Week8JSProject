@@ -21,7 +21,7 @@ const createRouter = function (collection) {
       // Requested dates are after cutoff - find from API
       fetch(apiURL)
         .then(apiRes => apiRes.json())
-        .then(json => res.json(json));
+        .then(json => res.json(json.launches));
     } else {
       // Requested dates are before historical cutoff - find in DB
       collection
