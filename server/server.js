@@ -10,8 +10,8 @@ app.use(cors())
 
 MongoClient.connect('mongodb://localhost:27017')
 .then((client) => {
-  const db = client.db('launch_db');
-  const launchesCollection = db.collection('launches');
+  const db = client.db('launches');
+  const launchesCollection = db.collection('launch_items');
   const launchesRouter = createRouter(launchesCollection);
   app.use('/api/launches', launchesRouter);
 
