@@ -6,11 +6,24 @@
         </video>
       <h1>Nova.</h1>
       <h3>The Future of Space Agency Launches</h3>
+      
+<launch-countdown date="August 25, 2019"></launch-countdown>
+
 </div>
+
+<!-- <div class="countdown"> -->
+
+<!-- </div> -->
+
 </template>
 
 <script>
+import LaunchCountdown from '@/components/LaunchCountdown.vue';
+
 export default {
+  components: {
+    'launch-countdown': LaunchCountdown
+  },
   name: 'LaunchSplash',
   data() {
     return { splashHeight: '1000px' }
@@ -65,6 +78,16 @@ h3 {
     height: 100%;
     overflow: hidden;
 }
-
+/* .countdown{
+    align-items: center;
+    bottom: 0;
+    background-color: #34495e;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top:0;
+} */
 
 </style>
