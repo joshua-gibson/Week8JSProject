@@ -65,6 +65,7 @@ export default {
 .navForm {
   justify-content: center;
   align-items: center;
+  min-width: 1200px;
 }
 
 .button {
