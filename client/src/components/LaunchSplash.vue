@@ -5,7 +5,7 @@
             <source src="../assets/shuttlecinemagraph.mp4" type="video/mp4">
         </video>
       <h1>Nova.</h1>
-      <h3>The Future of Space Agency Launches</h3>
+      <h3>The History and Future of Spaceflight</h3>
 </div>
 </template>
 

@@ -51,8 +51,8 @@ export default {
   font-weight: 1000;
   justify-content: center;
   align-items: center;
-  margin: 1px;
-  padding: 1px;
+  /* margin: 1px;
+  padding: 1px; */
 
   height: 70px;
   position: -webkit-sticky;
